@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Bouncing Box</title>
+	<script src="jquery.min.js"></script>
+
+<!-- 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+
+	<!-- BEGIN CSS -->
+	<style>
+		/* TODO 1 */
+		.box {
+			display: block;
+			position: absolute;
+			width: 70px;
+			height: 70px;
+			top: 100px;
+			left: 0px;
+			background-color: teal;
+			font-size: 300%;
+			text-align: center;
+		}
+		.board {
+			background-image: url("data:image/jpeg;base64,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")
+		}
+	</style>
+</head>
+<body class="board">
+	<!-- HTML for the box -->
+	<div class="box">?</div>
+	<!-- BEGIN JAVASCRIPT -->
+	<script>
+		(function(){
+			'use strict'
+			/* global &*/
+
+			// jQuery stuff setup for you
+			var box = $('.box');
+			var boardWidth = $('.board').width();
+			var boardHeight = $(window).height();
+			
+			// TODO 2 - Variable declarations 
+			var position = 0;
+			var points = 0;
+			var speed = 10;
+			var direction = 1;
+			
+			box.css('left', position);
+			box.text(points);         
+			
+			var update = function() {
+				// TODO 3 / 6 / 7 / 8
+				position = position + (speed * direction);
+				position = position + (speed * direction);
+				console.log("new position: " + position);
+				box.css('left', position);
+					if(position > boardHeight) {
+    					direction = -1;
+					}
+					if(position <= 0) {
+    					direction = 1;
+					}
+			};
+			var handleBoxClick = function() {
+				// TODO 4 / 5
+				points = points + 1;
+				box.text(points);  
+				position = position + (speed * direction);                                                                                                                                                                 
+				speed = speed + 3;
+				box.selector
+			};
+			
+			//this executes the update function code every 50 milliseconds
+			setInterval(update, 50);
+			// this executes the handleBoxClick function code every time the box is clicked on
+			box.on('click', handleBoxClick);
+		})();
+	</script>
+</body>
+</html>
